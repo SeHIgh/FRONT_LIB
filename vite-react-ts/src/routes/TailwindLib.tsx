@@ -9,11 +9,11 @@ function TailwindLib() {
                     This is a Tailwind CSS library page.
                 </p>
             </div>
-            <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center gap-x-4">
+            <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center gap-x-4 hover:bg-slate-50">
                 <div className="shrink-0">
                     <img
                         className="size-12"
-                        src="/img/logo.svg"
+                        src="/img/logo/SeHi_Logo_NoTitle.svg"
                         alt="ChitChat Logo"
                     />
                 </div>
