@@ -48,3 +48,55 @@ export default tseslint.config({
   },
 })
 ```
+
+## tailwindcss
+
+### 설치
+```bash
+// tailwindcss 설치
+npm install -D tailwindcss
+
+// tailwind.config.js 파일 프로젝트의 루트 디렉토리에 생성
+npx tailwindcss init
+```
+
+### config 파일 설정
+
+```js 
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // tailwind.config.js 파일의 모든 템플릿 파일에 대한 경로를 추가합니다.
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+
+### 기본 CSS 파일 생성
+@tailwind 지시문을 기본 CSS 파일에 추가합니다.
+```css
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### 빌드 과정
+ 
+```bash
+// -i <file>: 빌드할 css 파일 경로
+// -o <file>: 빌드후 저장될 css 파일 경로
+npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
+```
+
+
+
+### 사용 예시
+ 
+```html
+<h1 class="text-3xl font-bold underline"> Hello world! </h1>
+```
