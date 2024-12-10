@@ -87,3 +87,36 @@ npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
 ```html
 <h1 class="text-3xl font-bold underline"> Hello world! </h1>
 ```
+
+```
+next-react-ts                    //
+├─ .dist                         //
+├─ .eslintrc.json                //
+├─ .gitignore                    //
+├─ next.config.ts                //
+├─ package-lock.json             //
+├─ package.json                  //
+├─ postcss.config.mjs            //
+├─ public                        //
+│  ├─ file.svg                   //
+│  ├─ globe.svg                  //
+│  ├─ next.svg                   //
+│  ├─ SeHi_Logo_NoBG.svg         //
+│  ├─ SeHi_Logo_NoTitle.svg      //
+│  ├─ vercel.svg                 //
+│  └─ window.svg                 //
+├─ README.md                     //
+├─ src                           //
+│  └─ app                        //
+│     ├─ favicon.ico             //
+│     ├─ fonts                   //
+│     │  ├─ Galmuri11.woff2      //
+│     │  ├─ Galmuri9.woff2       //
+│     │  ├─ GeistMonoVF.woff     //
+│     │  └─ GeistVF.woff         //
+│     ├─ globals.css             //
+│     ├─ layout.tsx              //
+│     └─ page.tsx                //
+├─ tailwind.config.ts            //
+└─ tsconfig.json                 //
+```
