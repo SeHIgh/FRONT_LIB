@@ -88,35 +88,49 @@ npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
 <h1 class="text-3xl font-bold underline"> Hello world! </h1>
 ```
 
+### 파일 구조
+```bash
+$ tree -I '.dist|.next|node_modules'
 ```
-next-react-ts                    //
-├─ .dist                         //
-├─ .eslintrc.json                //
-├─ .gitignore                    //
-├─ next.config.ts                //
-├─ package-lock.json             //
-├─ package.json                  //
-├─ postcss.config.mjs            //
-├─ public                        //
-│  ├─ file.svg                   //
-│  ├─ globe.svg                  //
-│  ├─ next.svg                   //
-│  ├─ SeHi_Logo_NoBG.svg         //
-│  ├─ SeHi_Logo_NoTitle.svg      //
-│  ├─ vercel.svg                 //
-│  └─ window.svg                 //
-├─ README.md                     //
-├─ src                           //
-│  └─ app                        //
-│     ├─ favicon.ico             //
-│     ├─ fonts                   //
-│     │  ├─ Galmuri11.woff2      //
-│     │  ├─ Galmuri9.woff2       //
-│     │  ├─ GeistMonoVF.woff     //
-│     │  └─ GeistVF.woff         //
-│     ├─ globals.css             //
-│     ├─ layout.tsx              //
-│     └─ page.tsx                //
-├─ tailwind.config.ts            //
-└─ tsconfig.json                 //
+
+```bash
+.
+├── README.md
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── SeHi_Logo_NoBG.svg
+│   ├── SeHi_Logo_NoTitle.svg
+│   ├── book.svg
+│   ├── dark.svg
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── light.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── fonts
+│   │   │   ├── Galmuri11.woff2
+│   │   │   ├── Galmuri9.woff2
+│   │   │   ├── GeistMonoVF.woff
+│   │   │   └── GeistVF.woff
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   └── main
+│   │       ├── Footer.tsx
+│   │       ├── Header.tsx
+│   │       └── Sidebar.tsx
+│   └── fonts.ts
+├── tailwind.config.ts
+└── tsconfig.json
+
+7 directories, 30 files
 ```
