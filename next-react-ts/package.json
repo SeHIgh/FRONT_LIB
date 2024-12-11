@@ -11,9 +11,7 @@
   "dependencies": {
     "next": "15.0.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "styled-components": "^6.1.13",
-    "twin.macro": "^3.4.1"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

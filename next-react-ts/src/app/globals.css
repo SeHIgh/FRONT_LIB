@@ -2,36 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'galmuri9';
+  src: url('/fonts/Galmuri9.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 :root {
   --foreground: #171717;
   --background: #ffffff;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+.dark {
+  --foreground: #ededed;
+  --background: #0a0a0a;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1{
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+@layer base {
+  html {
+    @apply font-galmuri9 antialiased;
+  }
 }
 
-#tab_id {
-  margin-right: 2.5rem;
-}
+@layer components {
+  #tab_id {
+    @apply mr-2.5 p-2 text-xl border-b-2 transition-all duration-300 ease-in-out;
+  }
 
-#tab_id:hover {
-  cursor: pointer;
-  border: 2px;
-  border-bottom: #cde1ff;
+  #tab_id:hover {
+    @apply cursor-pointer border-b-2 border-b-blue-300;
+  }
+
+  h1 {
+    @apply text-3xl font-bold leading-10;
+  }
 }

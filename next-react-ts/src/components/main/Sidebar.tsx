@@ -8,7 +8,7 @@ export default function Sidebar() {
 
     return (
         <aside
-            className={`p-2.5 bg-stone-200 transition-all duration-300 ease-in-out overflow-hidden ${
+            className={`p-2.5 backdrop-blur-sm transition-all duration-300 ease-in-out overflow-hidden ${
                 isOpen ? "w-48" : "w-12"
             }`}
         >

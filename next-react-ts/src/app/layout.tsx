@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/main/Header";
 import Sidebar from "@/components/main/Sidebar";
 import Footer from "@/components/main/Footer";
-
-// 로컬 폰트 설정
-const galmuri9 = localFont({
-    src: "./fonts/Galmuri9.woff2",
-    variable: "--font-galmuri9",
-    weight: "100 900",
-});
 
 // 메타데이터 설정 (페이지 제목, 설명, 아이콘)
 export const metadata: Metadata = {
@@ -28,7 +21,6 @@ export default function RootLayout({
     return (
         <html lang="ko">
             <body
-                className={`${galmuri9.variable} antialiased`}
                 suppressHydrationWarning={true}
             >
                 {/* 공통 Header */}
