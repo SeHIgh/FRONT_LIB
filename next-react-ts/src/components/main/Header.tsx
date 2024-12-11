@@ -39,13 +39,10 @@ export default function Header() {
                     height={40}
                     priority
                 />
-                <h1>Next Front Library</h1>
+                <h1>FRONT LIBRARY</h1>
             </Link>
             <div className="flex flex-row justify-between gap-2 item-center">
-                <nav
-                    aria-label="Tabs"
-                    className="border-r-2 h-full flex items-center"
-                >
+                <nav aria-label="Tabs" className="h-full flex items-center">
                     <ul className="flex flex-row justify-center">
                         <li id="tab_id">
                             <Link href="/">홈</Link>
@@ -58,21 +55,21 @@ export default function Header() {
                         </li>
                     </ul>
                 </nav>
-                <button onClick={toggleDarkMode}>
+                <button className="w-10" onClick={toggleDarkMode}>
                     {isDarkMode ? (
                         <Image
                             src="/light.svg"
                             alt="light img"
-                            width={40}
-                            height={40}
+                            width={26}
+                            height={26}
                             priority
                         />
                     ) : (
                         <Image
                             src="/dark.svg"
                             alt="dark img"
-                            width={40}
-                            height={40}
+                            width={26}
+                            height={26}
                             priority
                         />
                     )}

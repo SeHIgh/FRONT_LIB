@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/main/Header";
-import Sidebar from "@/components/main/Sidebar";
 import Footer from "@/components/main/Footer";
 
 // 메타데이터 설정 (페이지 제목, 설명, 아이콘)
@@ -27,8 +26,8 @@ export default function RootLayout({
                 <Header />
                 <div className="flex">
                     {/* 공통 Sidebar */}
-                    <Sidebar />
-                    <main className="flex-1">
+                    {/* <Sidebar /> */}
+                    <main className="h-[calc(100vh-70px)] flex-1">
                         {/* Rendering 될 내용 */}
                         {children}
                     </main>

@@ -11,12 +11,12 @@
 
 :root {
   --foreground: #171717;
-  --background: #ffffff;
+  --background: #ededed;
 }
 
 .dark {
   --foreground: #ededed;
-  --background: #0a0a0a;
+  --background: #1B1E2B;
 }
 
 body {
@@ -32,14 +32,22 @@ body {
 
 @layer components {
   #tab_id {
-    @apply mr-2.5 p-2 text-xl border-b-2 transition-all duration-300 ease-in-out;
+    @apply mr-2.5 p-2 text-lg border-b-2 border-b-gray-300 transition-all duration-300 ease-in-out;
   }
 
   #tab_id:hover {
-    @apply cursor-pointer border-b-2 border-b-blue-300;
+    @apply cursor-pointer text-gray-400 border-b-[#cde1ff];
   }
 
   h1 {
-    @apply text-3xl font-bold leading-10;
+    @apply text-2xl font-bold leading-10;
+  }
+
+  button img{
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  button:hover img{
+    @apply scale-125;
   }
 }
