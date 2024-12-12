@@ -28,15 +28,9 @@ body {
   html {
     @apply font-galmuri9 antialiased;
   }
-}
 
-@layer components {
-  #tab_id {
-    @apply mr-2.5 p-2 text-lg border-b-2 border-b-gray-300 transition-all duration-300 ease-in-out;
-  }
-
-  #tab_id:hover {
-    @apply cursor-pointer text-gray-400 border-b-[#cde1ff];
+  code {
+    @apply font-galmuri9 bg-gray-300 px-2 py-1 rounded font-semibold text-gray-700;
   }
 
   h1 {
@@ -49,5 +43,19 @@ body {
   
   button:hover img{
     @apply scale-125;
+  }
+
+  Image{
+    @apply dark:invert;
+  }
+}
+
+@layer components {
+  #tab_id {
+    @apply mr-2.5 p-2 text-lg border-b-2 border-b-gray-300 transition-all duration-300 ease-in-out;
+  }
+
+  #tab_id:hover {
+    @apply cursor-pointer text-gray-400 border-b-[#accdff];
   }
 }

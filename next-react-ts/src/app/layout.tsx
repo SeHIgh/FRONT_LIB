@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-// import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/main/Header";
 import Footer from "@/components/main/Footer";
+import Sidebar from "@/components/main/Sidebar";
 
 // 메타데이터 설정 (페이지 제목, 설명, 아이콘)
 export const metadata: Metadata = {
@@ -19,15 +19,20 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body
-                suppressHydrationWarning={true}
-            >
+            <head>
+                <link
+                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                    rel="stylesheet"
+                />
+            </head>
+            <body suppressHydrationWarning={true}>
                 {/* 공통 Header */}
                 <Header />
-                <div className="flex">
+                <div className="flex px-10 py-2">
                     {/* 공통 Sidebar */}
                     {/* <Sidebar /> */}
-                    <main className="h-[calc(100vh-70px)] flex-1">
+                    <main className="dark:invert h-[calc(100vh-70px)] flex-1 bg-gray-300 rounded-t-xl overflow-auto flex flex-row justify-between gap-2">
+                        <Sidebar />
                         {/* Rendering 될 내용 */}
                         {children}
                     </main>

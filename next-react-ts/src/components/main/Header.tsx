@@ -30,28 +30,39 @@ export default function Header() {
     return (
         // 헤더 높이 25rem(100px), 상단 고정, 패딩 2.5
         // 배경 투명도 10%
-        <header className="sticky top-0 w-full px-4 py-3 backdrop-blur-sm flex flex-row justify-between align-middle z-10">
+        <header className="sticky top-0 w-full px-6 py-3 backdrop-blur-sm flex flex-row justify-between align-middle z-10">
             <Link href="/" className="flex flex-row gap-1">
-                <Image
-                    src="/book.svg"
-                    alt="Next.js logo"
-                    width={40}
-                    height={40}
-                    priority
-                />
-                <h1>FRONT LIBRARY</h1>
+                {isDarkMode ? (
+                    <Image
+                        src="/FRONT_LIBRARY_NOBG_DARK.svg"
+                        alt="Next.js logo"
+                        width={260}
+                        height={100}
+                        loading="eager"
+                        priority
+                    />
+                ) : (
+                    <Image
+                        src="/FRONT_LIBRARY_NOBG_LIGHT.svg"
+                        alt="Next.js logo"
+                        width={260}
+                        height={100}
+                        loading="eager"
+                        priority
+                    />
+                )}
             </Link>
             <div className="flex flex-row justify-between gap-2 item-center">
                 <nav aria-label="Tabs" className="h-full flex items-center">
                     <ul className="flex flex-row justify-center">
                         <li id="tab_id">
-                            <Link href="/">홈</Link>
+                            <Link href="/docs">Docs</Link>
                         </li>
                         <li id="tab_id">
-                            <Link href="/about">소개</Link>
+                            <Link href="/Blog">Blog</Link>
                         </li>
                         <li id="tab_id">
-                            <Link href="/contact">연락처</Link>
+                            <Link href="/Update">Update</Link>
                         </li>
                     </ul>
                 </nav>
