@@ -114,6 +114,8 @@ $ tree -I '.dist|.next|node_modules'
 │   └── window.svg
 ├── src
 │   ├── app
+│   │   ├── SeHi_Logo_NoBG.svg
+│   │   ├── SeHi_Logo_NoTitle.svg
 │   │   ├── favicon.ico
 │   │   ├── fonts
 │   │   │   ├── Galmuri11.woff2
@@ -132,5 +134,5 @@ $ tree -I '.dist|.next|node_modules'
 ├── tailwind.config.ts
 └── tsconfig.json
 
-7 directories, 30 files
+7 directories, 32 files
 ```
