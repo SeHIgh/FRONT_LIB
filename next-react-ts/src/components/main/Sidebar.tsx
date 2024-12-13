@@ -15,7 +15,10 @@ export const SideList: React.FC<SideListProps> = ({ isOpen, title, icon }) => {
         // 접을 때 아이콘이 이동하는 현상 발생
         // <li className={`flex ${isOpen ? `justify-start pl-[10px]` : `justify-center`} items-center`}>
         // 아이콘이 고정 되게 하기 위해 수정
-        <li className="h-10 pl-[9.85px] flex justify-start items-center rounded-md hover:bg-slate-400">
+        <li
+            title={title}
+            className="h-10 pl-[9.85px] flex justify-start items-center rounded-md transition-all duration-300 ease-in-out hover:bg-slate-400"
+        >
             <Link
                 href={`/${title}`}
                 passHref
@@ -37,28 +40,28 @@ export default function Sidebar() {
 
     return (
         <aside
-            className={`p-2.5 bg-gray-600 transition-all duration-300 ease-in-out overflow-hidden ${
+            className={`p-2.5 bg-background transition-[width] duration-300 ease-in-out overflow-x-hidden overflow-y-auto ${
                 isOpen ? "w-48" : "w-16"
-            } text-white flex flex-col`}
+            } flex flex-col`}
         >
             <div className="flex justify-end">
                 <button onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? (
-                        <Image
-                            aria-hidden
-                            src="/arrow_left.svg"
-                            alt="open icon"
-                            width={40}
-                            height={40}
-                        />
+                        // material icon 은 text-4xl, text-[40px] 등이 안 먹힘
+                        // -> fontSize로 크기 조절
+                        <i
+                            className="material-icons"
+                            style={{ fontSize: "40px" }}
+                        >
+                            keyboard_arrow_left
+                        </i>
                     ) : (
-                        <Image
-                            aria-hidden
-                            src="/arrow_right.svg"
-                            alt="close icon"
-                            width={40}
-                            height={40}
-                        />
+                        <i
+                            className="material-icons"
+                            style={{ fontSize: "40px" }}
+                        >
+                            keyboard_arrow_right
+                        </i>
                     )}
                 </button>
             </div>

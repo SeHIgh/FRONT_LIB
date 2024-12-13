@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/main/Header";
 import Footer from "@/components/main/Footer";
 import Sidebar from "@/components/main/Sidebar";
+import CurrentRoute from "@/components/CurrentRoute";
 
 // 메타데이터 설정 (페이지 제목, 설명, 아이콘)
 export const metadata: Metadata = {
@@ -25,16 +26,19 @@ export default function RootLayout({
                     rel="stylesheet"
                 />
             </head>
-            <body suppressHydrationWarning={true}>
+            <body suppressHydrationWarning={true} className="h-screen flex flex-col">
                 {/* 공통 Header */}
                 <Header />
-                <div className="flex px-10 py-2">
+                <div className="flex-auto flex px-10 py-2">
                     {/* 공통 Sidebar */}
                     {/* <Sidebar /> */}
-                    <main className="dark:invert h-[calc(100vh-70px)] flex-1 bg-gray-300 rounded-t-xl overflow-auto flex flex-row justify-between gap-2">
+                    <main className="dark:text-invert flex-1 bg-gray-600 border-8 border-gray-600 rounded-t-xl overflow-auto flex flex-row justify-between gap-2">
                         <Sidebar />
-                        {/* Rendering 될 내용 */}
-                        {children}
+                        <section className="flex flex-col flex-1 gap-2">
+                            <CurrentRoute />
+                            {/* Rendering 될 내용 */}
+                            {children}
+                        </section>
                     </main>
                 </div>
                 {/* 공통 Footer */}

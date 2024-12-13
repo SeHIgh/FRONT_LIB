@@ -3,59 +3,59 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'galmuri9';
-  src: url('/fonts/Galmuri9.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
+    font-family: "galmuri9";
+    src: url("/fonts/Galmuri9.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
 }
 
 :root {
-  --foreground: #171717;
-  --background: #ededed;
+    --foreground: #171717;
+    --background: #ededed;
 }
 
 .dark {
-  --foreground: #ededed;
-  --background: #1B1E2B;
+    --foreground: #ededed;
+    --background: #1b1e2b;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+    color: var(--foreground);
+    background: var(--background);
 }
 
 @layer base {
-  html {
-    @apply font-galmuri9 antialiased;
-  }
+    html {
+        @apply font-galmuri9 antialiased;
+    }
 
-  code {
-    @apply font-galmuri9 bg-gray-300 px-2 py-1 rounded font-semibold text-gray-700;
-  }
+    code {
+        @apply font-galmuri9 bg-gray-300 px-2 py-1 rounded font-semibold text-gray-700;
+    }
 
-  h1 {
-    @apply text-2xl font-bold leading-10;
-  }
+    li {
+        @apply cursor-pointer;
+    }
 
-  button img{
-    @apply transition-all duration-300 ease-in-out;
-  }
-  
-  button:hover img{
-    @apply scale-125;
-  }
+    h1 {
+        @apply text-2xl font-bold leading-10;
+    }
 
-  Image{
-    @apply dark:invert;
-  }
+    button i {
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    button:hover i {
+        @apply text-gray-500;
+    }
 }
 
 @layer components {
-  #tab_id {
-    @apply mr-2.5 p-2 text-lg border-b-2 border-b-gray-300 transition-all duration-300 ease-in-out;
-  }
+    #tab_id {
+        @apply mr-2.5 p-2 text-lg border-b-2 border-b-gray-300 transition-all duration-300 ease-in-out;
+    }
 
-  #tab_id:hover {
-    @apply cursor-pointer text-gray-400 border-b-[#accdff];
-  }
+    #tab_id:hover {
+        @apply cursor-pointer text-gray-400 border-b-[#accdff];
+    }
 }
