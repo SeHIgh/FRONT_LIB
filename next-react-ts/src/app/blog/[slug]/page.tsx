@@ -3,14 +3,12 @@ import path from "path";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
-interface PostProps {
-    params: {
-        slug: string;
-    };
-}
-
-export default async function PostPage({ params }: PostProps) {
-    const { slug } = params;
+export default async function PostPage({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
+    const slug = (await params).slug;
 
     // 빌드 타임에서만 파일 시스템 접근
     const filePath = path.join(process.cwd(), "src/app/posts", `${slug}.mdx`);
