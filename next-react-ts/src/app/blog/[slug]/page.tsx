@@ -11,9 +11,12 @@ interface PostProps {
 
 export default async function PostPage({ params }: PostProps) {
     const { slug } = params;
-    // 프로젝트 루트 경로에 있는 'posts' 디렉토리 내의 MDX 파일 경로 지정
+
+    // 빌드 타임에서만 파일 시스템 접근
     const filePath = path.join(process.cwd(), "src/app/posts", `${slug}.mdx`);
     const fileContents = fs.readFileSync(filePath, "utf8");
+
+    // MDX 파일의 메타데이터와 콘텐츠 분리
     const { content, data } = matter(fileContents);
 
     return (
@@ -25,10 +28,10 @@ export default async function PostPage({ params }: PostProps) {
 }
 
 export async function generateStaticParams() {
-    // 프로젝트 루트 경로에 있는 'posts' 디렉토리 경로 지정
     const contentDir = path.join(process.cwd(), "src/app/posts");
     const filenames = fs.readdirSync(contentDir);
 
+    // 슬러그 생성
     return filenames.map((filename) => ({
         slug: filename.replace(/\.mdx$/, ""),
     }));
