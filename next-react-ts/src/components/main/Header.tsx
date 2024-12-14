@@ -59,10 +59,10 @@ export default function Header() {
                             <Link href="/docs">Docs</Link>
                         </li>
                         <li id="tab_id">
-                            <Link href="/Blog">Blog</Link>
+                            <Link href="/blog">Blog</Link>
                         </li>
                         <li id="tab_id">
-                            <Link href="/Update">Update</Link>
+                            <Link href="/update">Update</Link>
                         </li>
                     </ul>
                 </nav>
