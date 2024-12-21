@@ -44,7 +44,7 @@ export default function RootLayout({
                                 className="flex-1 overflow-y-auto"
                                 style={{
                                     maxHeight: "calc(100vh - 150px)", // 헤더와 푸터를 제외한 영역
-                                    padding: "1rem",
+                                    // padding: "1rem",
                                 }}
                             >
                                 {children}
