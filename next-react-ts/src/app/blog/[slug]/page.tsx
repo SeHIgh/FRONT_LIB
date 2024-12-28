@@ -1,36 +1,62 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { GetStaticProps, GetStaticPaths } from 'next';
 
-export default async function PostPage({
-    params,
-}: {
-    params: Promise<{ slug: string }>;
-}) {
-    const slug = (await params).slug;
+// MDX 파일의 메타 데이터와 콘텐츠를 읽기 위한 함수
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
-    // 빌드 타임에서만 파일 시스템 접근
-    const filePath = path.join(process.cwd(), "src/app/posts", `${slug}.mdx`);
-    const fileContents = fs.readFileSync(filePath, "utf8");
+interface PostProps {
+    source: MDXRemoteSerializeResult;
+    frontMatter:{
+        title: string;
+        date: string;
+        desc: string;
+        thumbnail: string;
+    }
+}
 
-    // MDX 파일의 메타데이터와 콘텐츠 분리
-    const { content, data } = matter(fileContents);
-
+// Post 컴포넌트 정의
+const PostPage:React.FC<PostProps> = ({ source, frontMatter }) => {
     return (
-        <article className="bg-gray-400 p-4">
-            <h1>{data.title}</h1>
-            <MDXRemote source={content} />
+        <article>
+            <h1>{frontMatter.title}</h1>
+            <MDXRemote {...source} />
         </article>
     );
 }
 
-export async function generateStaticParams() {
-    const contentDir = path.join(process.cwd(), "src/app/posts");
-    const filenames = fs.readdirSync(contentDir);
+// 빌드 타임에 각 포스트에 대한 데이터를 생성
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const slug = params?.slug as string;
+    const filePath = path.join(process.cwd(), "src/app/posts", `${slug}.mdx`);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const { content, data } = matter(fileContents);
 
-    // 슬러그 생성
-    return filenames.map((filename) => ({
-        slug: filename.replace(/\.mdx$/, ""),
+    const mdxSource = await serialize(content);
+
+    return {
+        props: {
+            source: mdxSource,
+            frontMatter: data,
+        },
+    };
+};
+
+// 빌드 타임에 사용 가능한 모든 경로를 생성
+export const getStaticPaths: GetStaticPaths = async () => {
+    const postsDirectory = path.join(process.cwd(), "src/app/posts");
+    const filenames = fs.readdirSync(postsDirectory);
+
+    const paths = filenames.map(filename => ({
+        params: { slug: filename.replace(/\.mdx$/, '') },
     }));
-}
+
+    return {
+        paths,
+        fallback: false, // 또는 'blocking' 등 다른 설정을 사용할 수 있습니다.
+    };
+};
+
+export default PostPage;

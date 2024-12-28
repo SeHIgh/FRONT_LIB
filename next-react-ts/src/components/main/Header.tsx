@@ -56,6 +56,9 @@ export default function Header() {
                 <nav aria-label="Tabs" className="h-full flex items-center">
                     <ul className="flex flex-row justify-center">
                         <li id="tab_id">
+                            <Link href="/music">Music</Link>
+                        </li>
+                        <li id="tab_id">
                             <Link href="/docs">Docs</Link>
                         </li>
                         <li id="tab_id">

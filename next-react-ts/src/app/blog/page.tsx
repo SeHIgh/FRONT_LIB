@@ -5,7 +5,7 @@ import Link from "next/link";
 import matter from "gray-matter";
 
 export default function BlogPage() {
-    const postsDirectory = path.join(process.cwd(), "src/app/posts");
+    const postsDirectory = path.join(process.cwd(), "src/posts");
     const filenames = fs.readdirSync(postsDirectory);
 
     const posts = filenames.map((filename) => {
@@ -16,6 +16,9 @@ export default function BlogPage() {
         return {
             slug: filename.replace(/\.mdx$/, ""),
             title: data.title,
+            date: data.date,
+            desc: data.desc,
+            thumbnail: data.thumbnail,
         };
     });
 
@@ -31,9 +34,11 @@ export default function BlogPage() {
                         className="border rounded-lg p-4 hover:bg-gray-100"
                     >
                         <Link href={`/blog/${post.slug}`}>
-                            <h2 className="text-xl font-semibold">
-                                {post.title}
-                            </h2>
+                            <div>
+                                <h2 className="text-xl font-semibold">
+                                    {post.title}
+                                </h2>
+                            </div>
                             <p>자세히 보기</p>
                         </Link>
                     </div>
