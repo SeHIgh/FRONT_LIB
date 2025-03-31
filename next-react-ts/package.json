@@ -1,10 +1,14 @@
 {
   "name": "next-react-ts",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "prebuild": "npm run convert:mdx && npm run generate-metadata",
     "build": "next build",
+    "generate-metadata": "node scripts/generate-metadata.mjs",
+    "convert:mdx": "node scripts/convert-md-to-mdx.mjs",
+    "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "next lint"
   },
@@ -17,7 +21,7 @@
     "dayjs": "^1.11.13",
     "glob": "^11.0.1",
     "gray-matter": "^4.0.3",
-    "next": "15.0.4",
+    "next": "^15.2.4",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

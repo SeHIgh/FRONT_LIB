@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
     return (
-        <div className="flex-auto bg-gray-400 grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-4 gap-16">
+        <div className="main-container grid grid-rows-[20px_1fr_20px] gap-16 items-center justify-items-center">
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
                 <Image
                     className="dark:invert mx-auto"

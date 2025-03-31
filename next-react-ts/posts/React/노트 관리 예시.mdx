@@ -1,0 +1,47 @@
+---
+title: '![[Pasted image 20241201230403.png]]'
+date: '2025-03-30'
+category: React
+description: 자동 변환된 MDX 파일
+---
+```js
+<Box sx={{ my: 4 }}>
+    <Typography variant="h5" gutterBottom>
+        노트 관리
+    </Typography>
+    <Grid container spacing={2}>
+        <Grid item xs={12}>
+	        <TextField
+                label="새로운 노트 추가"
+                multiline
+                rows={2}
+                fullWidth
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+            />
+        </Grid>
+        <Grid item xs={12}>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddNote}
+            >
+	        노트 추가
+            </Button>
+        </Grid>
+    </Grid>
+    <Box sx={{ my: 4 }}>
+        <Typography variant="h6" gutterBottom>
+          기존 노트
+        </Typography>
+	        {deal.notes.length > 0 ? (
+		         deal.notes.map((note, index) => (
+                <Box key={index} sx={{ mb: 2 }}>
+                  <Typography variant="body2">{note}</Typography>
+                </Box>
+              ))
+            ) : (
+              <Typography variant="body2">노트가 없습니다.</Typography>
+            )}
+</Box>
+```

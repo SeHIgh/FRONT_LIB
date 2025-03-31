@@ -1,38 +1,54 @@
-import { PostBody } from "@/components/post/PostBody";
-import { getPostDetail } from "../../../../utils/postfunc";
-import Link from "next/link";
+import { MDXContent } from '@/components/post/MDXContent';
+import { notFound } from 'next/navigation';
+import { getCategoryDetailList, getPostDetail, getPostList } from 'utils/postfunc';
 
-const PostDetailPage = async ({ params: { category, slug } }) => {
+// 정적 재생성 시간 설정 (1시간)
+export const revalidate = 3600;
+
+interface PostPageProps {
+    params: Promise<{
+        category: string;
+        slug: string;
+    }>;
+}
+
+// 빌드 시 생성할 경로 정의
+export async function generateStaticParams() {
+    const categories = await getCategoryDetailList();
+    const allPosts = [];
+
+    for (const category of categories) {
+        const posts = await getPostList(category.name);
+        allPosts.push(
+            ...posts.map((post) => ({
+                category: category.name,
+                slug: post.slug,
+            }))
+        );
+    }
+
+    return allPosts;
+}
+
+export default async function PostPage({ params }: PostPageProps) {
+    const { category, slug } = await params;
     const post = await getPostDetail(category, slug);
 
+    if (!post) {
+        notFound();
+    }
+
     return (
-        <div>
-            <h1 className="text-2xl font-bold text-center my-10">
-                {post?.title}
-            </h1>
-            <div className="mb-6">
-                <p className="text-center text-gray-500">
-                    {post?.date} - {post?.readingMinutes} 읽기
-                </p>
-            </div>
-            <div className="prose mx-auto">
-                <PostBody post={post} />
-            </div>
-            <div className="flex justify-center mt-10">
-                <Link href={`/blog/${post?.category}`}>
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">
-                        {post?.category} 카테고리로 돌아가기
-                    </button>
-                </Link>
-            </div>
-            <div className="flex justify-center mt-4">
-                <Link href="/blog">
-                    <button className="px-4 py-2 bg-gray-200 rounded-lg">
-                        블로그 홈으로 돌아가기
-                    </button>
-                </Link>
-            </div>
-        </div>
+        <article className="container mx-auto px-4 py-8 prose prose-lg">
+            <header className="mb-8">
+                <h1 className="text-4xl font-bold">{post.title}</h1>
+                <div className="flex gap-4 text-gray-600 mt-4">
+                    <time dateTime={post.date}>{post.dateString}</time>
+                    <span>·</span>
+                    <span>{post.readingMinutes}분 읽기</span>
+                </div>
+            </header>
+            <MDXContent content={post.content} />
+        </article>
     );
-};
-export default PostDetailPage;
+}

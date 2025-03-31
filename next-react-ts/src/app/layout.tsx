@@ -33,15 +33,13 @@ export default function RootLayout({
                 {/* 공통 Header */}
                 <Header />
                 <div className="flex-auto flex px-10 py-2">
-                    {/* 공통 Sidebar */}
-                    {/* <Sidebar /> */}
                     <main className="dark:text-invert bg-gray-600 border-8 border-gray-600 rounded-t-xl overflow-auto flex flex-row justify-between gap-2 flex-1">
                         <Sidebar />
                         <section className="flex flex-col flex-1 gap-2 overflow-hidden">
                             <CurrentRoute />
                             {/* Rendering 될 내용 */}
                             <div
-                                className="flex-1 overflow-y-auto"
+                                className="bg-[--background] flex-1 overflow-y-auto"
                                 style={{
                                     maxHeight: "calc(100vh - 150px)", // 헤더와 푸터를 제외한 영역
                                     // padding: "1rem",
