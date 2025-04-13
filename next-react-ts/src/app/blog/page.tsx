@@ -1,109 +1,89 @@
-import React from "react";
-import CategoryList from "@/components/post/CategoryList";
-import { PostCard } from "@/components/post/PostCard";
-import { getCategoryDetailList, getPostList } from "utils/postfunc";
 import Link from "next/link";
+import React from "react";
+import { getDatabaseItems } from "utils/notion";
 
-// [최적화] ISR 설정 : 정적 재생성 시간 설정 (1시간)
-export const revalidate = 3600;
-
-const POSTS_PER_PAGE = 10;
-
-interface BlogPageProps {
-    searchParams: Promise<{ page?: string }>;
-}
-
-export default async function BlogPage({
-    searchParams
-}: BlogPageProps) {
-    const { page = '1' } = await searchParams;
-    const currentPage = parseInt(page);
-    const posts = await getPostList('all');
-    const categories = await getCategoryDetailList();
-
-    // 전체 페이지 수 계산
-    const totalPosts = posts.length;
-    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
-
-    // 현재 페이지의 포스트들
-    const paginatedPosts = posts.slice(
-        (currentPage - 1) * POSTS_PER_PAGE,
-        currentPage * POSTS_PER_PAGE
-    );
+export default async function BlogPage() {
+    const posts = await getDatabaseItems();
 
     return (
-        <div className="main-container flex flex-col justify-start items-center gap-4 px-4 py-8">
-            {/* 카테고리 목록 */}
-            <div className="category-list">
-                <CategoryList list={categories} />
-            </div>
-
-            {/* 포스트 목록 */}
-            <ul className="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4">
-                {paginatedPosts.map((post) => (
-                    <PostCard key={post.slug} post={post} />
-                ))}
-            </ul>
-
-            {/* 페이지네이션 UI */}
-            <div className="pagination flex gap-2 mt-8">
-                {/* 이전 페이지 버튼 */}
-                {currentPage > 1 && (
-                    <Link
-                        href={`/blog?page=${currentPage - 1}`}
-                        className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
-                    >
-                        이전
-                    </Link>
-                )}
-
-                {/* 페이지 번호들 */}
-                <div className="flex gap-2">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
-                        // 현재 페이지 주변 5개의 페이지만 표시
-                        if (
-                            pageNum === 1 ||
-                            pageNum === totalPages ||
-                            (pageNum >= currentPage - 2 && pageNum <= currentPage + 2)
-                        ) {
-                            return (
-                                <Link
-                                    key={pageNum}
-                                    href={`/blog?page=${pageNum}`}
-                                    className={`px-4 py-2 rounded-lg ${
-                                        currentPage === pageNum
-                                            ? 'bg-blue-500 text-white'
-                                            : 'bg-gray-100 hover:bg-gray-200'
-                                    }`}
+        <section className="px-6 py-2 h-full">
+            <h1 className="mb-1">Notion Blog</h1>
+            <div className="flex flex-1 h-full">
+                {/* 게시판 리스트 */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {posts.map((post) => (
+                        <Link
+                            key={post.id}
+                            href={{
+                                pathname: `/blog/${post.name}`,
+                                query: { id: post.id, name: post.name},
+                            }}
+                        >
+                            <div
+                                key={post.id}
+                                className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:bg-gray-200 hover:scale-105 transition duration-200 ease-in-out cursor-pointer"
+                                // onClick={() => setSelectedPost(post)}
+                            >
+                                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                    {post.name}
+                                </h2>
+                                <p className="text-gray-600 mb-2">
+                                    <span className="font-medium">Status:</span>{" "}
+                                    {post.status || "No status"}
+                                </p>
+                                <p className="text-gray-600 mb-2">
+                                    <span className="font-medium">
+                                        Created Time:
+                                    </span>{" "}
+                                    {new Date(
+                                        post.createdTime || ""
+                                    ).toLocaleDateString()}
+                                </p>
+                                <p className="text-gray-600 mb-4">
+                                    <span className="font-medium">
+                                        Last Edited Time:
+                                    </span>{" "}
+                                    {new Date(
+                                        post.lastEditedTime || ""
+                                    ).toLocaleDateString()}
+                                </p>
+                                <ul className="mb-4">
+                                    {post.files?.map((file, index) => (
+                                        <li
+                                            key={index}
+                                            className="text-blue-500 underline"
+                                        >
+                                            <a
+                                                href={file.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {file.name || "Unnamed File"}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <a
+                                    href={post.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-600 hover:underline"
                                 >
-                                    {pageNum}
-                                </Link>
-                            );
-                        } else if (
-                            pageNum === currentPage - 3 ||
-                            pageNum === currentPage + 3
-                        ) {
-                            return <span key={pageNum}>...</span>;
-                        }
-                        return null;
-                    })}
+                                    View on Notion
+                                </a>
+                                {/* <iframe
+                                    src={`https://lucky-servant-f87.notion.site/ebd/${post.id.replace(
+                                        /-/g,
+                                        ""
+                                    )}`}
+                                    width="100%"
+                                    height="600"
+                                /> */}
+                            </div>
+                        </Link>
+                    ))}
                 </div>
-
-                {/* 다음 페이지 버튼 */}
-                {currentPage < totalPages && (
-                    <Link
-                        href={`/blog?page=${currentPage + 1}`}
-                        className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
-                    >
-                        다음
-                    </Link>
-                )}
             </div>
-
-            {/* 전체 포스트 수 표시 */}
-            <div className="text-gray-500 mt-4">
-                전체 {totalPosts}개의 포스트
-            </div>
-        </div>
+        </section>
     );
 }

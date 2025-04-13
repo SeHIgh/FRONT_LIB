@@ -1,40 +1,16 @@
-const nextConfig = {
-    pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-    images: {
-        formats: ["image/avif", "image/webp"],
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "**",
-            },
-        ],
+import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
+
+const withMDX = createMDX({
+    extension: /\.mdx?$/,
+    options: {
+        providerImportSource: "@mdx-js/react",
     },
-    experimental: {
-        mdxRs: true,
-    },
-    // 정적 페이지 생성 최적화
-    async rewrites() {
-        return [
-            {
-                source: "/blog/:category*",
-                destination: "/blog/:category*",
-            },
-        ];
-    },
-    // 캐시 설정
-    async headers() {
-        return [
-            {
-                source: "/blog/:category*",
-                headers: [
-                    {
-                        key: "Cache-Control",
-                        value: "public, max-age=3600, stale-while-revalidate=86400",
-                    },
-                ],
-            },
-        ];
-    },
-};
+});
+
+/** @type {import('next').NextConfig} */
+const nextConfig: NextConfig = withMDX({
+    pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"], // 확장자 설정
+});
 
 export default nextConfig;

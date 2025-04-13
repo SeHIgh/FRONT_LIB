@@ -1,4 +1,7 @@
 import Image from "next/image";
+import 'react-notion-x/src/styles.css'; // react-notion-x 기본 스타일
+import 'prismjs/themes/prism-tomorrow.css'; // 코드 블록 하이라이트 (선택 사항)
+import 'katex/dist/katex.min.css'; // 수식 렌더링 (선택 사항)
 
 export default function Home() {
     return (
